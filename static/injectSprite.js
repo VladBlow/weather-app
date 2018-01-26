@@ -1,3 +1,5 @@
+// This script helped for inject and caching svg sprite
+
 (function(window, document) {
   'use strict';
 
@@ -22,7 +24,7 @@
       else document.addEventListener('DOMContentLoaded', insertIT);
     };
 
-  if (isLocalStorage && localStorage.getItem('inlineSVGrev') == revision) {
+  if (isLocalStorage && localStorage.getItem('inlineSVGrev') === revision) {
     data = localStorage.getItem('inlineSVGdata');
     if (data) {
       insert();
