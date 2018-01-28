@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import format from 'date-fns/format';
 import styled from 'styled-components';
 
@@ -68,6 +69,10 @@ export class Header extends Component {
   handleOnChange = ({ target: { value } }) => this.setState({ value });
 
   handleClear = () => this.setState({ value: '' });
+  // 770e97f1d934e290ce7d7b9aa681a860
+  handleOnClick = () => {
+    this.props.getWeather(this.state.value);
+  };
 
   render() {
     const { value } = this.state;
@@ -80,6 +85,7 @@ export class Header extends Component {
             value={value}
             placeholder="Enter your city"
           />
+          <button onClick={this.handleOnClick}>send</button>
           {value && <CleanSearch onClick={this.handleClear}>╳</CleanSearch>}
         </InputWrap>
 
