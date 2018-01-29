@@ -6,7 +6,7 @@ export const Board = ({ cities }) => {
   return (
     <div>
       {cities.map((city, i) => (
-        <div>
+        <div key={i}>
           {city.name}
           {city.main.temp}
         </div>

@@ -18,10 +18,26 @@ const Cart = styled.article`
 
 export class App extends Component {
   componentDidMount() {
-    document.addEventListener('beforeunload', () => {});
+    const cities = localStorage.getItem('cities');
+
+    // If we have cities in localStorage -> fetch data for this cities
+    if (cities) {
+      this.props.getWeatherByIds(JSON.parse(cities));
+    }
+
+    window.addEventListener('beforeunload', this.handleUnload);
   }
 
-  componentDidUnmount() {}
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.handleUnload);
+  }
+
+  handleUnload = () => {
+    // If we have cities in Redux -> save to localStorage
+    if (this.props.citiesIds) {
+      localStorage.setItem('cities', JSON.stringify(this.props.citiesIds));
+    }
+  };
 
   render() {
     return (
