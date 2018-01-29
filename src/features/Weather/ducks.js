@@ -23,6 +23,13 @@ export const getWeatherError = message => ({
   payload: message,
 });
 
+const DELETE_WEATHER_BY_ID = 'weather/DELETE_WEATHER_BY_ID';
+
+export const deleteWeatherById = id => ({
+  type: DELETE_WEATHER_BY_ID,
+  payload: id,
+});
+
 /**
  * Actions and actions creators for several cities
  */
@@ -92,6 +99,14 @@ export const weatherReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         entities,
+      };
+    }
+
+    case DELETE_WEATHER_BY_ID: {
+      delete state.entities[action.payload];
+
+      return {
+        ...state,
       };
     }
 

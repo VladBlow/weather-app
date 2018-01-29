@@ -68,8 +68,15 @@ export class Header extends Component {
 
   handleOnChange = ({ target: { value } }) => this.setState({ value });
 
+  handleKeyUp = e => {
+    if (e.keyCode === 13) {
+      this.props.getWeather(this.state.value);
+      this.handleClear();
+    }
+  };
+
   handleClear = () => this.setState({ value: '' });
-  // 770e97f1d934e290ce7d7b9aa681a860
+
   handleOnClick = () => {
     this.props.getWeather(this.state.value);
   };
@@ -81,11 +88,11 @@ export class Header extends Component {
       <Wrap>
         <InputWrap>
           <Input
+            onKeyUp={this.handleKeyUp}
             onChange={this.handleOnChange}
             value={value}
             placeholder="Enter your city"
           />
-          <button onClick={this.handleOnClick}>send</button>
           {value && <CleanSearch onClick={this.handleClear}>╳</CleanSearch>}
         </InputWrap>
 
